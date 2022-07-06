@@ -95,6 +95,7 @@ public class GadgetsPage {
         }
         
         System.out.println(str);
+        driver.close();
 
     }
 
@@ -105,6 +106,7 @@ public class GadgetsPage {
         Actions action = new Actions(driver);
         action.moveToElement(randElement).perform();
         action.moveToElement(randElement).build().perform();
+
     }
 }
 
