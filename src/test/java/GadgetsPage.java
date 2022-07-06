@@ -4,7 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
@@ -19,12 +21,12 @@ public class GadgetsPage {
         driver.get("https://www.dns-shop.ru/");
     }
     public void closeConfirmCityModal() throws InterruptedException {
-        WebElement confirmCity = driver.findElement(By.className("v-confirm-city"));
-        WebElement confirmCityBtn = driver.findElement(By.xpath("/html/body/header/div[2]/div/ul[1]/li[1]/div/div/div[2]/div[1]/div/button[1]"));
-        if (confirmCity.isDisplayed()) {
+        WebElement confirmCityBtn = new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(driver -> driver.findElement(By.xpath("/html/body/header/div[2]/div/ul[1]/li[1]/div/div/div[2]/div[1]/div/button[1]")));
+
             confirmCityBtn.click();
             Thread.sleep(2000);
-        }
+
     }
 
     public void pointCategory() throws InterruptedException {
@@ -76,8 +78,8 @@ public class GadgetsPage {
         
         for (WebElement element: a) {
 
-            int number = 0;
-            if (a.size()>1) {
+            int number;
+            if (a.size()>=1) {
                 number = Integer.parseInt(element.getText().replaceAll("[^0-9]", ""));
                 str+=number + " + ";
 
